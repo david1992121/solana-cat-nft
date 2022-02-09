@@ -1,5 +1,9 @@
 import React, {useEffect, useState} from 'react';
 
+const imageDivStyle = {
+    display: "inline", 
+    marginRight: "10px"
+};
 
 const MintedItems = ({uri}) => {
     const [imgUrl, setImgUrl] = useState("");
@@ -7,7 +11,6 @@ const MintedItems = ({uri}) => {
 
     const getImageURL = (imageUrl) => {
         fetch(imageUrl).then(res => res.json()).then(mintMetaData => {
-            console.log(mintMetaData);
             setImgUrl(mintMetaData.image);
             setAltVal(mintMetaData.name);
         })
@@ -17,9 +20,9 @@ const MintedItems = ({uri}) => {
         getImageURL(uri);
     }, [uri])
 
-    return <div>
+    return <div style={imageDivStyle}>
         { imgUrl !== "" && 
-            <img alt={altVal} src={imgUrl} /> }
+            <img alt={altVal} src={imgUrl} style={{ width: "300px" }}/> }
     </div>;
 }
 
